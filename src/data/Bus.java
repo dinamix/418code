@@ -28,9 +28,8 @@ public class Bus {
 	private int line;
 	private int link;
 	private double length;
-	private String co2;
-	private String nox;
 	private double head;
+	private double traveltime;
 	
 	public Bus(String bus) {
 		String[] array = bus.split(",");
@@ -38,7 +37,6 @@ public class Bus {
 		//Clean up whitespace and tabs from input
 		for(int i = 0; i < array.length; i++) {
 			array[i] = cleanString(array[i]);
-			System.out.println(array[i]);
 		}
 		
 		vehtypename = array[0];
@@ -66,9 +64,8 @@ public class Bus {
 		line = Integer.parseInt(array[22]);
 		link = Integer.parseInt(array[23]);
 		length = Double.parseDouble(array[24]);
-		co2 = array[25];
-		nox = array[26];
-		head = Double.parseDouble(array[27]);
+		head = Double.parseDouble(array[25]);
+		traveltime = t - stim;
 	}
 
 	public String getVehtypename() {
@@ -175,8 +172,12 @@ public class Bus {
 		return head;
 	}
 	
+	public double getTraveltime() {
+		return traveltime;
+	}
+	
 	public String toString() {
-		return vehtypename + "," + route + "," + vehnr + "," + tod + "," + t +"," + stim; 
+		return vehtypename + "," + route + "," + vehnr + "," + tod + "," + traveltime; 
 	}
 
 	//Intake of arbitrary sized data using ArrayList object
@@ -222,11 +223,41 @@ public class Bus {
 		return line.replaceAll("\\s+","");
 	}
 	
-	public static void main(String[] args) throws IOException {
-		File file = new File("Input//cdn_165_17_new_schedule_2h.csv");
-		Object[] array = createArray(file);
+	/*public static void computeBusTravelTimes(Bus[] busarray, int busnumber) {
+		for(int i = 0; i < busarray.length; i++) {
+			if(busarray[i].getRoute() == busnumber) {
+				busarray[i].bustraveltime = busarray[i].t - busarray[i].stim;
+			}
+		}
+	}*/
+	
+	public static void outputBusData(Bus[] busarray, File newfile, int busnumber, int stp) throws IOException {
+		PrintWriter out = new PrintWriter(newfile);
 		
-		System.out.println(array[0]);
+		//print titles here
+		out.println("vehtypename" + "," + "route" + "," + "vehnr" + "," + "tod" + "," + "traveltime" );
+		
+		for(int i = 0; i < busarray.length; i++) {
+			if(busarray[i].getRoute() == busnumber && busarray[i].getStp() == stp) {
+				out.println(busarray[i]);
+			}
+		}
+		out.close();
 	}
-
+	
+	public static void main(String[] args) throws IOException {
+		double starttime = System.currentTimeMillis();
+		
+		File file = new File("Input//basemode2h.csv");
+		Object[] array = createArray(file);
+		Bus[] busarray = (Bus[])array;
+		
+		File newfile1650 = new File("Output//1650traveltimes.csv");
+		Bus.outputBusData(busarray, newfile1650, 1650, 107);
+		
+		File newfile165 = new File("Output//165traveltimes.csv");
+		Bus.outputBusData(busarray, newfile165, 165, 2);
+		
+		System.out.println((System.currentTimeMillis() - starttime)/1000.0);
+	}
 }

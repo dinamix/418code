@@ -252,11 +252,11 @@ public class Bus {
 		Object[] array = createArray(file);
 		Bus[] busarray = (Bus[])array;
 		
-		File newfile1650 = new File("Output//1650traveltimes.csv");
-		Bus.outputBusData(busarray, newfile1650, 1650, 107);
+		//File newfile1650 = new File("Output//1650traveltimes.csv");
+		//Bus.outputBusData(busarray, newfile1650, 1650, 107);
 		
-		File newfile165 = new File("Output//165traveltimes.csv");
-		Bus.outputBusData(busarray, newfile165, 165, 2);
+		//File newfile165 = new File("Output//165traveltimes.csv");
+		//Bus.outputBusData(busarray, newfile165, 165, 2);
 		
 		System.out.println((System.currentTimeMillis() - starttime)/1000.0);
 	}

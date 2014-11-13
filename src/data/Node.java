@@ -155,18 +155,17 @@ public class Node {
 		
 		return los;
 	}
+	
+	//for testing within class
+	/*public static void main(String[] args) throws IOException {
+		File inputfolder = new File("NodeInput//");
+		File[] fileinput = inputfolder.listFiles();
 
-	public static void main(String[] args) throws IOException {
-		File file = new File("Input//cdn_165_17_new_schedule_1.csv");
-		
-		Object[] array = createArray(file);
-		Node[] nodearray = (Node[])array;
-		
-		System.out.println(nodearray.length);
-		System.out.println(nodearray[0]);
-		
-		File newfile = new File("Output//nodetestout.csv");
-		outputLOS(newfile,nodearray);
-	}
-
+		for(int i = 0; i < fileinput.length; i++) {
+			Object[] array = createArray(fileinput[i]);
+			Node[] nodearray = (Node[])array;	
+			File newfile = new File("NodeOutput//output_" + fileinput[i].getName());
+			outputLOS(newfile,nodearray);
+		}
+	}*/
 }

@@ -245,7 +245,7 @@ public class Bus {
 		out.close();
 	}
 	
-	public static void main(String[] args) throws IOException {
+	/*public static void main(String[] args) throws IOException {
 		double starttime = System.currentTimeMillis();
 		
 		File file = new File("Input//basemode2h.csv");
@@ -259,5 +259,5 @@ public class Bus {
 		//Bus.outputBusData(busarray, newfile165, 165, 2);
 		
 		System.out.println((System.currentTimeMillis() - starttime)/1000.0);
-	}
+	}*/
 }
